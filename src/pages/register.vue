@@ -37,8 +37,11 @@ export default {
   },
   methods: {
     Login() {
-      if (this.phone == "" || this.nickname == "" || this.password == "")
+      if (this.phone == "" || this.nickname == "" || this.password == ""){
+        this.$Toast({message:"用户名或密码不能为空", position: 'bottom',});
         return;
+      }
+       
       this.isShow = true;
       setTimeout(() => {
          this.isShow=false

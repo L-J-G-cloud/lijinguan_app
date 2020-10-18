@@ -37,7 +37,10 @@ export default {
   methods: {
     ...mapActions({ changeUserInfoAction: "changeUserInfoAction" }),
     login() {
-      if (this.user.name == "" || this.user.pass == "") return;
+      if (this.user.name == "" || this.user.pass == ""){
+        this.toToast("用户名或密码不能为空");
+        return;
+      } 
       reqLogin(this.user.name, this.user.pass).then((res) => {
          this.toToast(res.data.msg);
         if (res.data.code == 200) {
@@ -51,12 +54,16 @@ export default {
       });
     },
     toToast(txt) {
+      // this.$toast.setDefaultOptions({ duration: 2000 });
       this.$toast({
         message: txt,
         // className:"mint-toast-text"
       });
     },
   },
+  mounted(){
+   
+  }
 };
 </script>
 
