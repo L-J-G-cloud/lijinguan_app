@@ -7,7 +7,7 @@
     <div class="input">
       <div class="line1">
         <div class="text">账 号：</div>
-        <input type="text" class="ipt" v-model="user.name"/>
+        <input type="text" class="ipt" v-model="user.name" />
       </div>
       <div class="line1 line2">
         <div class="text">密 码：</div>
@@ -15,48 +15,55 @@
       </div>
       <div class="forget">忘记密码</div>
     </div>
-    <div  class="btn" @click="login">登录</div>
+    <div class="btn" @click="login">登录</div>
   </div>
-  
 </template>
 
 <script>
-import  {reqLogin} from "../utils/request"
-import {mapGetters,mapActions} from "vuex"
+import { reqLogin } from "../utils/request";
+import { mapGetters, mapActions } from "vuex";
 export default {
-        data(){
-            return{
-                user:{
-                    name:"",
-                    pass:""
-                }
-            }
-        },
-        computed:{
-          ...mapGetters({})
-        },
-        methods:{
-          ...mapActions({changeUserInfoAction:"changeUserInfoAction"}),
-            login(){
-                if(this.user.name==""||this.user.pass=="")
-                return;
-                reqLogin(this.user.name,this.user.pass).then(res=>{
-                    if(res.data.code==200){
-                        this.changeUserInfoAction(res.data.list);
-
-                        // sessionStorage.setItem('token',res.data.list.token);
-                        // localStorage.setItem('uid',res.data.list.uid);
-                        this.$router.push("/index/home");
-                    }else{
-                        console.log(res.data.msg);
-                    }
-                })
-            }
-        },
+  data() {
+    return {
+      user: {
+        name: "",
+        pass: "",
+      },
+    };
+  },
+  computed: {
+    ...mapGetters({}),
+  },
+  methods: {
+    ...mapActions({ changeUserInfoAction: "changeUserInfoAction" }),
+    login() {
+      if (this.user.name == "" || this.user.pass == "") return;
+      reqLogin(this.user.name, this.user.pass).then((res) => {
+         this.toToast(res.data.msg);
+        if (res.data.code == 200) {
+          this.changeUserInfoAction(res.data.list);
+          // sessionStorage.setItem('token',res.data.list.token);
+          // localStorage.setItem('uid',res.data.list.uid);
+          this.$router.push("/index/home");
+        } else {
+          console.log(res.data.msg);
+        }
+      });
+    },
+    toToast(txt) {
+      this.$toast({
+        message: txt,
+        // className:"mint-toast-text"
+      });
+    },
+  },
 };
 </script>
 
 <style scoped>
+/* .mint-toast-text{
+  color: #fff ; 
+} */
 .header {
   position: relative;
 
@@ -76,56 +83,56 @@ export default {
   font-size: 0.4rem;
 }
 .btn {
-    width: 5.98rem;
-    height: 1rem;
-    background: #f90;
-    color: #fff;
-    font-size: .34rem;
-    text-align: center;
-    line-height: 1rem;
-    border-radius: .2rem;
-    margin: 0 auto;
+  width: 5.98rem;
+  height: 1rem;
+  background: #f90;
+  color: #fff;
+  font-size: 0.34rem;
+  text-align: center;
+  line-height: 1rem;
+  border-radius: 0.2rem;
+  margin: 0 auto;
 }
 .input {
-    width: 5.98rem;
-    margin: 2.46rem auto 0;
+  width: 5.98rem;
+  margin: 2.46rem auto 0;
 }
 .line1 {
-    height: .78rem;
-    border-bottom: .01rem solid #a3a3a3;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
+  height: 0.78rem;
+  border-bottom: 0.01rem solid #a3a3a3;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 .text {
-    width: 1.02rem;
-    font-size: .28rem;
-    color: #333;
+  width: 1.02rem;
+  font-size: 0.28rem;
+  color: #333;
 }
 .ipt {
-    -webkit-box-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
-    border: none;
-    font-size: .28rem;
-    margin-top: -.4rem;
-    background: #fafafa;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  border: none;
+  font-size: 0.28rem;
+  margin-top: -0.4rem;
+  background: #fafafa;
 }
 .line2 {
-    margin-top: .56rem;
+  margin-top: 0.56rem;
 }
 .line1 {
-    height: .78rem;
-    border-bottom: .01rem solid #a3a3a3;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
+  height: 0.78rem;
+  border-bottom: 0.01rem solid #a3a3a3;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 .forget {
-    font-size: .24rem;
-    color: #666;
-    text-align: right;
-    margin-top: .44rem;
-    margin-bottom: .3rem;
+  font-size: 0.24rem;
+  color: #666;
+  text-align: right;
+  margin-top: 0.44rem;
+  margin-bottom: 0.3rem;
 }
 </style>

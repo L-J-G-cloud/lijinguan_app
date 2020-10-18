@@ -20,6 +20,7 @@ export default {
     methods:{
         ...mapActions({changeUserInfoAction:"changeUserInfoAction"}),
         logOut(){
+           this.$toast('退出成功');
            this.changeUserInfoAction({});
            this.$router.push('/login');
         }

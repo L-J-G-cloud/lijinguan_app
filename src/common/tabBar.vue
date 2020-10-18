@@ -41,10 +41,12 @@ footer {
   display: flex;
   padding-top: 0.2rem;
   background-color: #fff;
+  
 }
 footer a {
   flex: 1;
   text-align: center;
+  color: #333;
 }
 footer img {
   width: 0.4rem;

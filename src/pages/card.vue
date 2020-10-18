@@ -113,6 +113,7 @@ export default {
     sub(id, index) {
       console.log(this.flag3);
       if (this.cardList[index].num == 1) {
+        this.$toast('亲,您的宝贝不能再少了');
         return;
       }
       if (this.flag3) {

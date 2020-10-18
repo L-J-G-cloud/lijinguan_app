@@ -31,6 +31,10 @@ import VueLazyload from 'vue-lazyload'
 Vue.use(VueLazyload)
 //10.注册全局的过滤器
 import "./filters"
+// 11. 注册vant Toast
+import { Toast } from 'vant';
+Vue.use(Toast);
+
 
 new Vue({
   el: '#app',
