@@ -156,6 +156,7 @@ export default {
         (action) => {
           reqDel(id).then((res) => {
             this.requestCardList();
+            this.flag=false;
             this.Mes = res.data.msg;
           });
         },
